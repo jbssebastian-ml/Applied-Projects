@@ -19,11 +19,9 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        working-directory: allen-parkway-closure-checker
-        run: pip install -r requirements.txt
+        run: pip install -r allen-parkway-closure-checker/requirements.txt
 
       - name: Run closure checker
-        working-directory: allen-parkway-closure-checker
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-        run: python main.py
+        run: python allen-parkway-closure-checker/main.py
