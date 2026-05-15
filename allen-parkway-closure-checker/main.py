@@ -1,38 +1,32 @@
 # First version
-# Checks for closure by: 
+# Checks for closure by:
 '''
-Searching for allen Parkway related words 
-print a warning if found
+Searching for Allen Parkway-related words.
+Print a warning if found.
 
-Use Houston TranStar because lane closures are upadted here by the minute. 
+Use Houston TranStar because lane closures are updated there.
 
-Explanations: 
-requests.get(...): Goes into the TranStar closure feed 
-response.json(...): Turns the feed into Python Data 
-KEYWORDS: streets keywords we are checking for closures 
-closure_matches_route(...): Checks one closure and asks if this mentions anything near allenparkway
+Explanations:
+requests.get(...): goes into the TranStar closure page
+KEYWORDS: street keywords we are checking for closures
+closure_matches_route(...): checks one closure and asks if it mentions anything near Allen Parkway
 
-Look at every closure, 
-if it matches my route, 
-If yes, report that 
+Look at every closure.
+If it matches my route, report that.
 '''
-
 
 import os
 import requests
 import html
 import re
 from requests.exceptions import ConnectionError, HTTPError, Timeout, RequestException
-# requests allows you to visit websites from code / internet requests
-# furthermore, import errors to handle errors
-
 
 
 TRANSTAR_LANE_CLOSURE_URL = "https://traffic.houstontranstar.org/construction/construction_report_media.aspx"
 NTFY_TOPIC = os.getenv("NTFY_TOPIC")
 NTFY_URL = f"https://ntfy.sh/{NTFY_TOPIC}" if NTFY_TOPIC else None
 
-# provide a list of keywords to look for in the website regarding closures
+
 KEYWORDS = [
     "allen parkway",
     "allen pkwy",
@@ -44,8 +38,6 @@ KEYWORDS = [
     "memorial drive",
     "exit ramp to allen parkway",
 ]
-
-
 
 
 def closure_matches_route(closure):
