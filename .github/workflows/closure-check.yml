@@ -18,6 +18,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Show repository files
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 3 -type f
+
       - name: Install dependencies
         run: pip install -r allen-parkway-closure-checker/requirements.txt
 
